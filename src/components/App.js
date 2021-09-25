@@ -3,11 +3,10 @@ import { useState } from "react";
 import { useEffect } from "react/cjs/react.development";
 import Header from "./Header";
 import Location from "./Location";
-import Menu from "./Menu";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     getData();
@@ -19,13 +18,16 @@ function App() {
     const numOfRows = 100;
     const url = `/tn_pubr_prkplce_info_api?serviceKey=${API_KEY}&pageNo=${pageNo}&numOfRows=${numOfRows}&type=json`
     const response = await axios.get(url);
-    console.log(response);
+    //주차장 데이터
+    const { data: { response: { body: { items } } } } = response;
+    setIsLoading(false);
+    setData(items);
   };
+
   return (
     <div className="App" >
       <Header />
-      <Location />
-      <Menu />
+      {isLoading ? <h1>Loading...</h1> : <Location data={data}/>}
     </div>
   );
 }
