@@ -1,8 +1,8 @@
 import axios from "axios";
-import { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import { useState, useEffect } from "react";
 import Header from "./Header";
 import Location from "./Location";
+import InfoTable from "./InfoTable";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +15,7 @@ function App() {
   const getData = async () => {
     const API_KEY = process.env.REACT_APP_API_KEY;
     const pageNo = 0;
-    const numOfRows = 100;
+    const numOfRows = 20;
     const url = `/tn_pubr_prkplce_info_api?serviceKey=${API_KEY}&pageNo=${pageNo}&numOfRows=${numOfRows}&type=json`
     const response = await axios.get(url);
     //주차장 데이터
@@ -27,7 +27,10 @@ function App() {
   return (
     <div className="App" >
       <Header />
-      {isLoading ? <h1>Loading...</h1> : <Location data={data}/>}
+      <div style={{display: 'flex', justifyContent: 'space-around'}}>
+        {isLoading ? <h1>Loading...</h1> : <Location data={data}/>}
+        <InfoTable data={data} isLoading={isLoading} />
+      </div>
     </div>
   );
 }

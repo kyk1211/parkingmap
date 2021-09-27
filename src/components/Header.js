@@ -4,11 +4,11 @@ export default function Header() {
 
   const handleClick = () => {
     window.location.reload();
-  }
+  };
 
   return (
     <div>
-      <button type='button' onClick={handleClick}>Home</button>
+      <button type='button' onClick={handleClick}>Refresh</button>
     </div>
-  )
+  );
 }
