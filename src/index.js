@@ -1,13 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App';
-import { HashRouter } from 'react-router-dom';
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import App from './components/App'
+import rootReducer from './reducers'
+import { configureStore } from '@reduxjs/toolkit'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <HashRouter>
-      <App/>
-    </HashRouter>
-  </React.StrictMode>,
+const store = configureStore({
+  reducer: rootReducer,
+});
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
-);
+)

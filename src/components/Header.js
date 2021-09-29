@@ -7,8 +7,8 @@ export default function Header() {
   };
 
   return (
-    <div>
-      <button type='button' onClick={handleClick}>Refresh</button>
+    <div style={{height: '50px', backgroundColor: 'white'}}>
+      <button type='button' style={{marginTop: '10px'}} onClick={handleClick}>Refresh</button>
     </div>
   );
 }

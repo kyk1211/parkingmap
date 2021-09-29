@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default function InfoTable({ data, isLoading }) {
-  console.log(data, isLoading);
+export default function InfoTable({ data }) {
+  
   return (
     <table>
       <thead>
@@ -15,8 +15,8 @@ export default function InfoTable({ data, isLoading }) {
         {data?.map((item, idx) => {
           if (item.rdnmadr) {
             return (
-              <tr>
-                <th>{item.rdnmadr || '미표기'}</th>
+              <tr key={idx}>
+                <th>{item.rdnmadr}</th>
                 <th>{item.lnmadr}</th>
                 <th>{item.operDay}</th>
               </tr>
