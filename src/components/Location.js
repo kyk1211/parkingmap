@@ -1,11 +1,15 @@
 /*global kakao*/ 
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux';
 import markerStar from '../img/markerStar.png';
+import { dataSelector } from '../slices/dataSlice';
 
-export default function Location({ data }) {
+export default function Location() {
+  
+  const { data } = useSelector(dataSelector);
   const geocoder = new kakao.maps.services.Geocoder();
-  const addressData = data.map(item => item.rdnmadr);
-  const addrList = addressData.filter((addr) => addr !== "");
+  const searchedData = data.filter(item => item.searched === true)
+  const addrList = searchedData.map(item => item.rdnmadr);
 
   useEffect(()=>{
     //map options

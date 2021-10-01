@@ -1,6 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { dataSelector } from '../slices/dataSlice';
 
-export default function InfoTable({ data }) {
+export default function InfoTable() {
+  
+  const { data } = useSelector(dataSelector);
+  const searchedData = data.filter(item => item.searched === true);
   
   return (
     <table>
@@ -11,19 +16,15 @@ export default function InfoTable({ data }) {
           <th>운영요일</th>
         </tr>
       </thead>
-      <tbody>
-        {data?.map((item, idx) => {
-          if (item.rdnmadr) {
-            return (
-              <tr key={idx}>
-                <th>{item.rdnmadr}</th>
-                <th>{item.lnmadr}</th>
-                <th>{item.operDay}</th>
-              </tr>
-            );
-          }
-        })}
-      </tbody>
+      {searchedData.map(item => (
+        <tbody key={item.id}>
+          <tr>
+            <th>{item.rdnmadr}</th>
+            <th>{item.lnmadr}</th>
+            <th>{item.operDay}</th>
+          </tr>
+        </tbody>)
+      )}
     </table>
   );
 }
