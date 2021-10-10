@@ -3,16 +3,13 @@ import axios from 'axios'
 
 const initialState = {
   data: [],
-  loading: false,
+  loading: true,
 }
 
 const dataSlice = createSlice({
   name: 'data',
   initialState,
   reducers: {
-    getData: state => {
-      state.loading = true
-    },
     getDataSuccess: (state, action) => {
       state.data = action.payload
       state.loading = false
@@ -39,13 +36,12 @@ export default dataSlice.reducer
 export const dataSelector = state => state.data
 
 // action
-export const { getData, getDataSuccess, getDataSearch } = dataSlice.actions
+export const { getDataSuccess, getDataSearch } = dataSlice.actions
 
 export function callData(pageNo, numOfRows) {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const url = `/tn_pubr_prkplce_info_api?serviceKey=${API_KEY}&pageNo=${pageNo}&numOfRows=${numOfRows}&type=json`
   return async dispatch => {
-    dispatch(getData())
 
     try {
       const response = await axios.get(url);

@@ -8,23 +8,25 @@ export default function InfoTable() {
   const searchedData = data.filter(item => item.searched === true);
   
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>도로명주소</th>
-          <th>지번주소</th>
-          <th>운영요일</th>
-        </tr>
-      </thead>
-      {searchedData.map(item => (
-        <tbody key={item.id}>
+    <>
+      <table>
+        <thead>
           <tr>
-            <th>{item.rdnmadr}</th>
-            <th>{item.lnmadr}</th>
-            <th>{item.operDay}</th>
+            <th>도로명주소</th>
+            <th>지번주소</th>
+            <th>운영요일</th>
           </tr>
-        </tbody>)
-      )}
-    </table>
+        </thead>
+        {searchedData.map(item => (
+          <tbody key={item.id}>
+            <tr>
+              <th>{item.rdnmadr}</th>
+              <th>{item.lnmadr}</th>
+              <th>{item.operDay}</th>
+            </tr>
+          </tbody>)
+        )}
+      </table>
+    </>
   );
 }
